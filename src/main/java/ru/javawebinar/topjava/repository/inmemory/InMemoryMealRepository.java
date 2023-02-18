@@ -11,6 +11,7 @@ import java.time.Month;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository.ADMIN_ID;
@@ -63,6 +64,10 @@ public class InMemoryMealRepository implements MealRepository {
     @Override
     public List<Meal> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         return null;
+    }
+    private List<Meal> filterByPredicate(int userId, Predicate<Meal> filter) {
+        Map<Integer,Meal> meals = usersMealsMap.get(userId);
+        return
     }
 }
 
