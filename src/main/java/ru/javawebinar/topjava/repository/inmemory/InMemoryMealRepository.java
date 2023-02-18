@@ -67,7 +67,8 @@ public class InMemoryMealRepository implements MealRepository {
     }
     private List<Meal> filterByPredicate(int userId, Predicate<Meal> filter) {
         Map<Integer,Meal> meals = usersMealsMap.get(userId);
-        return
+        return CollectionUtils.isEmpty(meals)? Collections.emptyList() :
+
     }
 }
 
