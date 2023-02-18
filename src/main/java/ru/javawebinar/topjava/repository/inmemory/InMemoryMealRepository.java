@@ -55,16 +55,12 @@ public class InMemoryMealRepository implements MealRepository {
 
     @Override
     public List<Meal> getAll(int userId) {
-        Map<Integer, Meal> meals = usersMealsMap.get(userId);
-        return CollectionUtils.isEmpty(meals) ? Collections.emptyList() :
-                meals.values().stream()
-                        .sorted(Comparator.comparing(Meal::getDateTime).reversed())
-                        .collect(Collectors.toList());
+        return filterByPredicate(userId,meal -> true);
     }
 
     @Override
     public List<Meal> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
-        return filterByPredicate(userId, Util.isBetweenHalfOpen());
+        return filterByPredicate(userId, meal -> Util.isBetweenHalfOpen(meal.getDateTime(),startDateTime,endDateTime));
     }
     private List<Meal> filterByPredicate(int userId, Predicate<Meal> filter) {
         Map<Integer,Meal> meals = usersMealsMap.get(userId);
