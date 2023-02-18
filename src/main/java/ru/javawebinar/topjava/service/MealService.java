@@ -1,16 +1,20 @@
 package ru.javawebinar.topjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import static ru.javawebinar.topjava.util.DateTimeUtil.atStartOfDayOrMin;
+import static ru.javawebinar.topjava.util.DateTimeUtil.atStartOfNextDayOrMax;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 @Service
 public class MealService {
@@ -36,10 +40,8 @@ public class MealService {
     public List<MealTo> getAll(Integer userId) {
         return MealsUtil.getTos(repository.getAll(userId), MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
-    public List<MealTo> getAllFiltered(LocalTime startTime, LocalTime endTime, Integer userId) {
-        if (startTime == null || endTime == null)
-            return getAll(userId);
-        return MealsUtil.getFilteredTos(repository.getAll(userId), MealsUtil.DEFAULT_CALORIES_PER_DAY,startTime,endTime.plusMinutes(1));
+    public List<Meal> getBetweenInclusive(@Nullable LocalDate startDate, @Nullable LocalDate endDate, int userId) {
+        return repository.getBetweenHalfOpen(atStartOfDayOrMin(startDate), atStartOfNextDayOrMax(endDate), userId);
     }
 
     public void update(Meal meal,Integer userId) {
