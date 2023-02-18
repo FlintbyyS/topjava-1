@@ -70,7 +70,8 @@ public class InMemoryMealRepository implements MealRepository {
         return CollectionUtils.isEmpty(meals)? Collections.emptyList() :
                 meals.values().stream()
                         .filter(filter)
-                        .sorted(Meal::getDateTime)
+                        .sorted(Comparator.comparing(Meal::getDateTime).reversed())
+                        .collect(Collectors.toList());
     }
 }
 
