@@ -37,8 +37,8 @@ public class MealService {
         return checkNotFoundWithId(repository.get(id,userId), id);
     }
 
-    public List<MealTo> getAll(Integer userId) {
-        return MealsUtil.getTos(repository.getAll(userId), MealsUtil.DEFAULT_CALORIES_PER_DAY);
+    public List<Meal> getAll(Integer userId) {
+        return repository.getAll(userId);
     }
     public List<Meal> getBetweenInclusive(@Nullable LocalDate startDate, @Nullable LocalDate endDate, int userId) {
         return repository.getBetweenHalfOpen(atStartOfDayOrMin(startDate), atStartOfNextDayOrMax(endDate), userId);
