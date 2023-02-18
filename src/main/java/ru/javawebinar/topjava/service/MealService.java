@@ -8,6 +8,7 @@ import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
@@ -35,7 +36,7 @@ public class MealService {
     public List<MealTo> getAll(Integer userId) {
         return MealsUtil.getTos(repository.getAll(userId), MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
-    public List<MealTo> getAllFiltered(LocalDateTime startTime, LocalDateTime endTime,Integer userId) {
+    public List<MealTo> getAllFiltered(LocalTime startTime, LocalTime endTime, Integer userId) {
         if (startTime == null || endTime == null)
             return getAll(userId);
         return MealsUtil.getFilteredTos(repository.getAll(userId), MealsUtil.DEFAULT_CALORIES_PER_DAY,startTime,endTime.plusMinutes(1));

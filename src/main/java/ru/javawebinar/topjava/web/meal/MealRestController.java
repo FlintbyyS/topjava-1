@@ -29,7 +29,7 @@ public class MealRestController {
         log.info("getAll");
         return service.getAll(SecurityUtil.authUserId());
     }
-    public List<MealTo> getAllFiltered(LocalDateTime startTime, LocalDateTime endTime) {
+    public List<MealTo> getAllFiltered(LocalTime startTime, LocalTime endTime) {
         log.info("getAllFiltered");
         return service.getAllFiltered(startTime,endTime,SecurityUtil.authUserId());
     }
