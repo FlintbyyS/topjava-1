@@ -1,3 +1,5 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ff135d1da9c649189b023930f95caafa)](https://www.codacy.com/gh/FlintbyyS/topjava-1/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FlintbyyS/topjava-1&amp;utm_campaign=Badge_Grade)
+
 Java Enterprise Online Project
 ===============================
 
